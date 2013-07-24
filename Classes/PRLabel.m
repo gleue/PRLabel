@@ -13,20 +13,23 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self) {
-        // Initialization code
+        
+        self.respondsToTouch = YES;
     }
+    
     return self;
 }
 
 - (BOOL)isUserInteractionEnabled
 {
-    return YES;
+    return self.respondsToTouch;
 }
 
 - (BOOL)canBecomeFirstResponder
 {
-    return YES;
+    return self.respondsToTouch;
 }
 
 - (BOOL)becomeFirstResponder {

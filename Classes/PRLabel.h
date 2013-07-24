@@ -26,4 +26,6 @@
 
 @property (weak, nonatomic) id <PRLabelDelegate> delegate;
 
+@property (assign, nonatomic, getter = doesRespondToTouch) BOOL respondsToTouch;
+
 @end
