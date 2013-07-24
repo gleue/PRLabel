@@ -18,6 +18,18 @@
         
         self.respondsToTouch = YES;
     }
+
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        
+        self.respondsToTouch = YES;
+    }
     
     return self;
 }
