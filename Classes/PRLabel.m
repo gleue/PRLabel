@@ -29,6 +29,40 @@
     return YES;
 }
 
+- (BOOL)becomeFirstResponder {
+    
+    if ([super becomeFirstResponder]) {
+        
+        if ([self.delegate respondsToSelector:@selector(labelDidBecomeFirstResponder:)]) {
+            
+            [self.delegate labelDidBecomeFirstResponder:self];
+        }
+
+        return YES;
+
+    } else {
+        
+        return NO;
+    }
+}
+
+- (BOOL)resignFirstResponder {
+
+    if ([super resignFirstResponder]) {
+
+        if ([self.delegate respondsToSelector:@selector(labelDidResignFirstResponder:)]) {
+            
+            [self.delegate labelDidResignFirstResponder:self];
+        }
+
+        return YES;
+        
+    } else {
+        
+        return NO;
+    }
+}
+
 # pragma mark - UIResponder overrides
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

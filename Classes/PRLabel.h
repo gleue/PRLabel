@@ -8,10 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class PRLabel;
+
+@protocol PRLabelDelegate <NSObject>
+
+@optional
+
+- (void)labelDidBecomeFirstResponder:(PRLabel *)label;
+- (void)labelDidResignFirstResponder:(PRLabel *)label;
+
+@end
+
 @interface PRLabel : UILabel
 
 @property (strong, nonatomic, readwrite) UIView* inputView;
 @property (strong, nonatomic, readwrite) UIView* inputAccessoryView;
 
+@property (weak, nonatomic) id <PRLabelDelegate> delegate;
 
 @end
