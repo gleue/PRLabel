@@ -46,10 +46,12 @@
 
 - (BOOL)becomeFirstResponder {
     
+    BOOL wasFirstResponder = self.isFirstResponder;
+
     if ([super becomeFirstResponder]) {
         
-        if ([self.delegate respondsToSelector:@selector(labelDidBecomeFirstResponder:)]) {
-            
+        if (wasFirstResponder == NO && [self.delegate respondsToSelector:@selector(labelDidBecomeFirstResponder:)]) {
+
             [self.delegate labelDidBecomeFirstResponder:self];
         }
 
