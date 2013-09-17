@@ -10,8 +10,8 @@
 
 @implementation PRLabel
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
+
     self = [super initWithFrame:frame];
     
     if (self) {
@@ -34,14 +34,21 @@
     return self;
 }
 
-- (BOOL)isUserInteractionEnabled
-{
+- (BOOL)isUserInteractionEnabled {
+
     return self.respondsToTouch;
 }
 
-- (BOOL)canBecomeFirstResponder
-{
-    return self.respondsToTouch;
+- (BOOL)canBecomeFirstResponder {
+
+    if ([self.delegate respondsToSelector:@selector(labelShouldBecomeFirstResponder:)]) {
+        
+        return [self.delegate labelShouldBecomeFirstResponder:self];
+        
+    } else {
+        
+        return self.respondsToTouch;
+    }
 }
 
 - (BOOL)becomeFirstResponder {
@@ -60,6 +67,18 @@
     } else {
         
         return NO;
+    }
+}
+
+- (BOOL)canResignFirstResponder {
+
+    if ([self.delegate respondsToSelector:@selector(labelShouldResignFirstResponder:)]) {
+        
+        return [self.delegate labelShouldResignFirstResponder:self];
+        
+    } else {
+        
+        return YES;
     }
 }
 
@@ -82,8 +101,8 @@
 
 # pragma mark - UIResponder overrides
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+
     [self becomeFirstResponder];
 }
 

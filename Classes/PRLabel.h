@@ -14,7 +14,10 @@
 
 @optional
 
+- (BOOL)labelShouldBecomeFirstResponder:(PRLabel *)label;
 - (void)labelDidBecomeFirstResponder:(PRLabel *)label;
+
+- (BOOL)labelShouldResignFirstResponder:(PRLabel *)label;
 - (void)labelDidResignFirstResponder:(PRLabel *)label;
 
 @end
