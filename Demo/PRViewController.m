@@ -7,7 +7,6 @@
 //
 
 #import "PRViewController.h"
-#import "PRLabel.h"
 
 @interface PRViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -26,14 +25,19 @@
     
     self.datePicker = [[UIDatePicker alloc] init];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
+
+    [self.datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
+    
+    self.dateLabel.delegate = self;
     self.dateLabel.inputView = self.datePicker;
     self.dateLabel.inputAccessoryView = [self accessoryToolbar];
-    [self.datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
     
     self.namePicker = [[UIPickerView alloc] init];
     self.namePicker.dataSource = self;
     self.namePicker.delegate = self;
     self.namePicker.showsSelectionIndicator = YES;
+
+    self.nameLabel.delegate = self;
     self.nameLabel.inputView = [self namePicker];
     self.nameLabel.inputAccessoryView = [self accessoryToolbar];
 }
@@ -65,6 +69,32 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.nameLabel.text = [self.namePicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
     
+}
+
+#pragma mark - PRLabelDelegate
+
+- (BOOL)labelShouldBecomeFirstResponder:(PRLabel *)label {
+    
+    //NSLog(@"%s label = %@", __PRETTY_FUNCTION__, (label == self.dateLabel) ? @"Date" : @"Name");
+    
+    return YES;
+}
+
+- (void)labelDidBecomeFirstResponder:(PRLabel *)label {
+    
+    //NSLog(@"%s label = %@", __PRETTY_FUNCTION__, (label == self.dateLabel) ? @"Date" : @"Name");
+}
+
+- (BOOL)labelShouldResignFirstResponder:(PRLabel *)label {
+    
+    //NSLog(@"%s label = %@", __PRETTY_FUNCTION__, (label == self.dateLabel) ? @"Date" : @"Name");
+    
+    return YES;
+}
+
+- (void)labelDidResignFirstResponder:(PRLabel *)label {
+    
+    //NSLog(@"%s label = %@", __PRETTY_FUNCTION__, (label == self.dateLabel) ? @"Date" : @"Name");
 }
 
 #pragma mark - Miscellaneous

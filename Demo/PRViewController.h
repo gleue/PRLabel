@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PRViewController : UIViewController 
+#import "PRLabel.h"
+
+@interface PRViewController : UIViewController <PRLabelDelegate>
 
 @end
